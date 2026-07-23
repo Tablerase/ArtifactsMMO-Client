@@ -1,5 +1,5 @@
 {
   "tasks": {
     "dev": "deno run --env-file --allow-env --allow-net Client/main.ts"
-  }
+  },
 }
