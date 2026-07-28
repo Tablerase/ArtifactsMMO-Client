@@ -1,6 +1,10 @@
 import { findResources } from "../actionPlanner.ts";
 import { api } from "../api.ts";
-import { CharacterSchema, ItemSlotType } from "../interface/character.ts";
+import {
+  CharacterSchema,
+  InventorySlot,
+  ItemSlotType,
+} from "../interface/character.ts";
 import { ItemSchema } from "../interface/item.ts";
 import { MapSchema } from "../interface/map.ts";
 import { Objective } from "../interface/objective.ts";
@@ -76,9 +80,50 @@ export class AiEngine {
     return actionQueue;
   }
 
-  private async bestGatheringEquipmentsInInventory(skill: GatheringSkill) {
-    const Equipments: ItemSchema[] = [];
-    Equipments[0].effects;
+  private async bestGatheringEquipmentInInventory(
+    skill: GatheringSkill,
+  ): Promise<ItemSchema | null> {
+    // Find better tools available
+    let skillRelatedItems: ItemSchema[] = [];
+    for (const item of this.character.inventory) {
+      const itemInfo = await api.getItem(item.code);
+      if (
+        itemInfo && itemInfo.effects &&
+        itemInfo.effects.find((effect) => effect.code === skill)
+      ) {
+        skillRelatedItems.push(itemInfo);
+      }
+    }
+    // return skillRelatedItems.sort((a, b) => b.level - a.level);
+    // Equip better tools
+    let bestTool: ItemSchema | null = null;
+    let bestValue: number = 0;
+    for (const equipment of skillRelatedItems) {
+      if (equipment.effects) {
+        for (const effect of equipment.effects) {
+          if (effect.value > bestValue) {
+            bestTool = equipment;
+            bestValue = effect.value;
+          }
+        }
+      }
+    }
+    if (bestTool) {
+      const slot: ItemSlotType =
+        (bestTool.type === "tool" || bestTool.type === "weapon")
+          ? "weapon"
+          : (bestTool.type as ItemSlotType);
+
+      const slotKey = `${slot}_slot` as keyof CharacterSchema;
+
+      const currentlyEquipped: string = this.character[slotKey] as string;
+      const currentlyEquippedInfo = await api.getItem(currentlyEquipped);
+      const res = currentlyEquippedInfo.level > bestTool.level
+        ? null
+        : bestTool;
+      return res ?? null;
+    }
+    return null;
   }
 
   async gather(
@@ -94,16 +139,16 @@ export class AiEngine {
       ? null
       : resource.skill;
     if (skill) {
-      // equip better tools available
-      let skillRelatedItems: ItemSchema[] = [];
-      for (const item of this.character.inventory) {
-        const itemInfo = await api.getItem(item.code);
-        if (
-          itemInfo && itemInfo.effects &&
-          itemInfo.effects.find((effect) => effect.code === skill)
-        ) {
-          skillRelatedItems.push(itemInfo);
-        }
+      const itemToEquip: ItemSchema | null = await this
+        .bestGatheringEquipmentInInventory(
+          skill,
+        );
+      if (itemToEquip) {
+        actionQueue.push({
+          type: "equip",
+          itemCode: itemToEquip.code,
+          slot: itemToEquip.type as ItemSlotType,
+        });
       }
     }
 
