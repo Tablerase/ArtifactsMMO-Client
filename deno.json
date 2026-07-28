@@ -1,5 +1,8 @@
 {
+  "compilerOptions": {
+    "lib": ["deno.ns", "deno.window", "deno.worker"]
+  },
   "tasks": {
-    "dev": "deno run --env-file --allow-env --allow-net Client/main.ts"
+    "dev": "deno run --env-file --allow-env --allow-net --allow-read --allow-write Client/main.ts"
   },
 }

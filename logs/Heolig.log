@@ -1,0 +1,943 @@
+[2026-07-28T13:48:57.077Z] [INFO] [WORKER_INIT] Worker initialized for Heolig with objective: CRAFT wooden_shield (x1)
+  📦 Payload: {
+  "type": "CRAFT",
+  "code": "wooden_shield",
+  "quantity": 1
+}
+[2026-07-28T13:48:57.088Z] [INFO] [ENGINE_START] Executing objective: CRAFT wooden_shield (x1)
+  📦 Payload: {
+  "type": "CRAFT",
+  "code": "wooden_shield",
+  "quantity": 1
+}
+[2026-07-28T13:48:57.089Z] [ERROR] [WORKER_ERROR] Worker failed: Cannot read properties of undefined (reading 'code')
+  📦 Payload: {
+  "name": "TypeError",
+  "message": "Cannot read properties of undefined (reading 'code')",
+  "stack": "TypeError: Cannot read properties of undefined (reading 'code')\n    at AiEngine.craftItemRecursive (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/objectives/aiEngine.ts:132:68)\n    at AiEngine.craft (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/objectives/aiEngine.ts:69:45)\n    at AiEngine.doObjective (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/objectives/aiEngine.ts:48:30)\n    at async self.onmessage (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/character_worker.ts:38:7)"
+}
+[2026-07-28T13:53:32.469Z] [INFO] [WORKER_INIT] Worker initialized for Heolig with objective: CRAFT wooden_shield (x1)
+  📦 Payload: {
+  "type": "CRAFT",
+  "code": "wooden_shield",
+  "quantity": 1
+}
+[2026-07-28T13:53:32.479Z] [INFO] [ENGINE_START] Executing objective: CRAFT wooden_shield (x1)
+  📦 Payload: {
+  "type": "CRAFT",
+  "code": "wooden_shield",
+  "quantity": 1
+}
+[2026-07-28T13:53:32.483Z] [DEBUG] [SEARCH_ITEM] Searching inventory for x1 wooden_shield
+  📦 Payload: {
+  "characterName": "Heolig",
+  "itemCode": "wooden_shield",
+  "found": false,
+  "totalQuantity": 0,
+  "locations": []
+}
+[2026-07-28T13:53:33.521Z] [INFO] [RECIPE_FOUND] Crafting 1x wooden_shield requires ingredients
+  📦 Payload: [
+  {
+    "code": "ash_plank",
+    "quantity": 6
+  }
+]
+[2026-07-28T13:53:33.521Z] [DEBUG] [SEARCH_ITEM] Searching inventory for x6 ash_plank
+  📦 Payload: {
+  "characterName": "Heolig",
+  "itemCode": "ash_plank",
+  "found": false,
+  "totalQuantity": 0,
+  "locations": []
+}
+[2026-07-28T13:53:33.929Z] [INFO] [RECIPE_FOUND] Crafting 6x ash_plank requires ingredients
+  📦 Payload: [
+  {
+    "code": "ash_wood",
+    "quantity": 10
+  }
+]
+[2026-07-28T13:53:33.930Z] [DEBUG] [SEARCH_ITEM] Searching inventory for x60 ash_wood
+  📦 Payload: {
+  "characterName": "Heolig",
+  "itemCode": "ash_wood",
+  "found": true,
+  "totalQuantity": 1,
+  "locations": [
+    {
+      "location": "inventory",
+      "slotName": "inventory_slot_3",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T13:53:34.335Z] [ERROR] [WORKER_ERROR] Worker failed: [HTTP 429] Rate limit exceeded: 10 per 1 second
+  📦 Payload: {
+  "name": "ApiError",
+  "message": "Rate limit exceeded: 10 per 1 second",
+  "stack": "ApiError: Rate limit exceeded: 10 per 1 second\n    at endpointRequest (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/api.ts:83:11)\n    at async AiEngine.craftItemRecursive (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/objectives/aiEngine.ts:178:22)\n    at async AiEngine.craftItemRecursive (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/objectives/aiEngine.ts:195:25)\n    at async AiEngine.craftItemRecursive (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/objectives/aiEngine.ts:195:25)\n    at async AiEngine.craft (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/objectives/aiEngine.ts:73:34)\n    at async AiEngine.doObjective (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/objectives/aiEngine.ts:52:19)\n    at async self.onmessage (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/character_worker.ts:38:7)"
+}
+[2026-07-28T13:56:39.618Z] [INFO] [WORKER_INIT] Worker initialized for Heolig with objective: CRAFT wooden_shield (x1)
+  📦 Payload: {
+  "type": "CRAFT",
+  "code": "wooden_shield",
+  "quantity": 1
+}
+[2026-07-28T13:56:39.629Z] [INFO] [ENGINE_START] Executing objective: CRAFT wooden_shield (x1)
+  📦 Payload: {
+  "type": "CRAFT",
+  "code": "wooden_shield",
+  "quantity": 1
+}
+[2026-07-28T13:56:39.631Z] [DEBUG] [SEARCH_ITEM] Searching inventory for x1 wooden_shield
+  📦 Payload: {
+  "characterName": "Heolig",
+  "itemCode": "wooden_shield",
+  "found": false,
+  "totalQuantity": 0,
+  "locations": []
+}
+[2026-07-28T13:56:41.152Z] [INFO] [RECIPE_FOUND] Crafting 1x wooden_shield requires ingredients
+  📦 Payload: [
+  {
+    "code": "ash_plank",
+    "quantity": 6
+  }
+]
+[2026-07-28T13:56:41.152Z] [DEBUG] [SEARCH_ITEM] Searching inventory for x6 ash_plank
+  📦 Payload: {
+  "characterName": "Heolig",
+  "itemCode": "ash_plank",
+  "found": false,
+  "totalQuantity": 0,
+  "locations": []
+}
+[2026-07-28T13:56:41.617Z] [INFO] [RECIPE_FOUND] Crafting 6x ash_plank requires ingredients
+  📦 Payload: [
+  {
+    "code": "ash_wood",
+    "quantity": 10
+  }
+]
+[2026-07-28T13:56:41.617Z] [DEBUG] [SEARCH_ITEM] Searching inventory for x60 ash_wood
+  📦 Payload: {
+  "characterName": "Heolig",
+  "itemCode": "ash_wood",
+  "found": true,
+  "totalQuantity": 1,
+  "locations": [
+    {
+      "location": "inventory",
+      "slotName": "inventory_slot_3",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T13:56:42.942Z] [INFO] [GATHER_PLAN] Target resource ash_tree at (-1, 0) x59
+[2026-07-28T13:56:43.461Z] [INFO] [WORKSHOP_FOUND] Found woodcutting workshop at (-2, -3)
+[2026-07-28T13:56:44.065Z] [INFO] [WORKSHOP_FOUND] Found gearcrafting workshop at (3, 1)
+[2026-07-28T13:56:44.065Z] [INFO] [PLAN_BUILT] Generated 6 action(s)
+  📦 Payload: [
+  {
+    "type": "move",
+    "x": -1,
+    "y": 0,
+    "name": "Move to ash_tree (-1, 0)"
+  },
+  {
+    "type": "gather",
+    "itemCode": "ash_tree",
+    "times": 59
+  },
+  {
+    "type": "move",
+    "x": -2,
+    "y": -3,
+    "name": "Move to Workshop (-2, -3)"
+  },
+  {
+    "type": "craft",
+    "itemCode": "ash_plank",
+    "quantity": 6,
+    "workshopX": -2,
+    "workshopY": -3
+  },
+  {
+    "type": "move",
+    "x": 3,
+    "y": 1,
+    "name": "Move to Workshop (3, 1)"
+  },
+  {
+    "type": "craft",
+    "itemCode": "wooden_shield",
+    "quantity": 1,
+    "workshopX": 3,
+    "workshopY": 1
+  }
+]
+[2026-07-28T13:56:44.066Z] [INFO] [QUEUE_START] Starting execution of 6 queued action(s)
+  📦 Payload: [
+  {
+    "type": "move",
+    "x": -1,
+    "y": 0,
+    "name": "Move to ash_tree (-1, 0)"
+  },
+  {
+    "type": "gather",
+    "itemCode": "ash_tree",
+    "times": 59
+  },
+  {
+    "type": "move",
+    "x": -2,
+    "y": -3,
+    "name": "Move to Workshop (-2, -3)"
+  },
+  {
+    "type": "craft",
+    "itemCode": "ash_plank",
+    "quantity": 6,
+    "workshopX": -2,
+    "workshopY": -3
+  },
+  {
+    "type": "move",
+    "x": 3,
+    "y": 1,
+    "name": "Move to Workshop (3, 1)"
+  },
+  {
+    "type": "craft",
+    "itemCode": "wooden_shield",
+    "quantity": 1,
+    "workshopX": 3,
+    "workshopY": 1
+  }
+]
+[2026-07-28T13:56:44.066Z] [INFO] [ACTION_EXEC] [1/6] MOVE
+  📦 Payload: {
+  "type": "move",
+  "x": -1,
+  "y": 0,
+  "name": "Move to ash_tree (-1, 0)"
+}
+[2026-07-28T13:56:44.066Z] [INFO] [MOVE] Moving to (-1, 0)
+[2026-07-28T13:56:44.493Z] [DEBUG] [COOLDOWN] Waiting 25s cooldown...
+[2026-07-28T13:57:09.498Z] [INFO] [ACTION_EXEC] [2/6] GATHER
+  📦 Payload: {
+  "type": "gather",
+  "itemCode": "ash_tree",
+  "times": 59
+}
+[2026-07-28T13:57:09.499Z] [INFO] [GATHER_START] Gathering ash_tree (59 times)
+[2026-07-28T13:57:09.918Z] [INFO] [GATHER_STEP] Gather 1/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T13:57:40.740Z] [INFO] [GATHER_STEP] Gather 2/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T13:58:11.204Z] [INFO] [GATHER_STEP] Gather 3/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T13:58:41.601Z] [INFO] [GATHER_STEP] Gather 4/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T13:59:12.304Z] [INFO] [GATHER_STEP] Gather 5/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T13:59:43.195Z] [INFO] [GATHER_STEP] Gather 6/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:00:13.593Z] [INFO] [GATHER_STEP] Gather 7/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    },
+    {
+      "code": "sap",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:00:43.979Z] [INFO] [GATHER_STEP] Gather 8/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:01:14.401Z] [INFO] [GATHER_STEP] Gather 9/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:01:44.797Z] [INFO] [GATHER_STEP] Gather 10/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:02:15.215Z] [INFO] [GATHER_STEP] Gather 11/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:02:45.622Z] [INFO] [GATHER_STEP] Gather 12/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:03:16.007Z] [INFO] [GATHER_STEP] Gather 13/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    },
+    {
+      "code": "event_ticket",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:03:46.405Z] [INFO] [GATHER_STEP] Gather 14/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:04:16.813Z] [INFO] [GATHER_STEP] Gather 15/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:04:47.206Z] [INFO] [GATHER_STEP] Gather 16/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:05:17.590Z] [INFO] [GATHER_STEP] Gather 17/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    },
+    {
+      "code": "sap",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:05:48.020Z] [INFO] [GATHER_STEP] Gather 18/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:06:18.414Z] [INFO] [GATHER_STEP] Gather 19/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:06:48.799Z] [INFO] [GATHER_STEP] Gather 20/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:07:19.202Z] [INFO] [GATHER_STEP] Gather 21/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:07:49.613Z] [INFO] [GATHER_STEP] Gather 22/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:08:20.219Z] [INFO] [GATHER_STEP] Gather 23/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:08:50.626Z] [INFO] [GATHER_STEP] Gather 24/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:09:21.032Z] [INFO] [GATHER_STEP] Gather 25/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:09:51.415Z] [INFO] [GATHER_STEP] Gather 26/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:10:21.815Z] [INFO] [GATHER_STEP] Gather 27/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:10:52.216Z] [INFO] [GATHER_STEP] Gather 28/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:11:22.594Z] [INFO] [GATHER_STEP] Gather 29/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:11:53.013Z] [INFO] [GATHER_STEP] Gather 30/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:12:23.365Z] [INFO] [GATHER_STEP] Gather 31/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    },
+    {
+      "code": "apple",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:12:53.847Z] [INFO] [GATHER_STEP] Gather 32/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:13:24.267Z] [INFO] [GATHER_STEP] Gather 33/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:13:55.102Z] [INFO] [GATHER_STEP] Gather 34/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:14:25.488Z] [INFO] [GATHER_STEP] Gather 35/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:14:55.864Z] [INFO] [GATHER_STEP] Gather 36/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:15:26.250Z] [INFO] [GATHER_STEP] Gather 37/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:15:56.631Z] [INFO] [GATHER_STEP] Gather 38/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:16:27.008Z] [INFO] [GATHER_STEP] Gather 39/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:16:57.415Z] [INFO] [GATHER_STEP] Gather 40/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:17:28.156Z] [INFO] [GATHER_STEP] Gather 41/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:17:58.584Z] [INFO] [GATHER_STEP] Gather 42/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:18:29.035Z] [INFO] [GATHER_STEP] Gather 43/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:18:59.406Z] [INFO] [GATHER_STEP] Gather 44/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:19:29.779Z] [INFO] [GATHER_STEP] Gather 45/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:20:00.160Z] [INFO] [GATHER_STEP] Gather 46/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:20:30.543Z] [INFO] [GATHER_STEP] Gather 47/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:21:00.936Z] [INFO] [GATHER_STEP] Gather 48/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:21:31.382Z] [INFO] [GATHER_STEP] Gather 49/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:22:01.775Z] [INFO] [GATHER_STEP] Gather 50/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:22:32.388Z] [INFO] [GATHER_STEP] Gather 51/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:23:02.807Z] [INFO] [GATHER_STEP] Gather 52/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    },
+    {
+      "code": "sap",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:23:33.191Z] [INFO] [GATHER_STEP] Gather 53/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:24:03.794Z] [INFO] [GATHER_STEP] Gather 54/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    },
+    {
+      "code": "sap",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:24:34.200Z] [INFO] [GATHER_STEP] Gather 55/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    },
+    {
+      "code": "sap",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:25:04.608Z] [INFO] [GATHER_STEP] Gather 56/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:25:35.035Z] [INFO] [GATHER_STEP] Gather 57/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:26:05.440Z] [INFO] [GATHER_STEP] Gather 58/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:26:35.803Z] [INFO] [GATHER_STEP] Gather 59/59 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:27:05.805Z] [INFO] [ACTION_EXEC] [3/6] MOVE
+  📦 Payload: {
+  "type": "move",
+  "x": -2,
+  "y": -3,
+  "name": "Move to Workshop (-2, -3)"
+}
+[2026-07-28T14:27:05.806Z] [INFO] [MOVE] Moving to (-2, -3)
+[2026-07-28T14:27:06.209Z] [DEBUG] [COOLDOWN] Waiting 20s cooldown...
+[2026-07-28T14:27:26.210Z] [INFO] [ACTION_EXEC] [4/6] CRAFT
+  📦 Payload: {
+  "type": "craft",
+  "itemCode": "ash_plank",
+  "quantity": 6,
+  "workshopX": -2,
+  "workshopY": -3
+}
+[2026-07-28T14:27:26.211Z] [INFO] [CRAFT] Crafting 6x ash_plank
+[2026-07-28T14:27:26.592Z] [DEBUG] [COOLDOWN] Waiting 30s cooldown...
+[2026-07-28T14:27:56.593Z] [INFO] [ACTION_EXEC] [5/6] MOVE
+  📦 Payload: {
+  "type": "move",
+  "x": 3,
+  "y": 1,
+  "name": "Move to Workshop (3, 1)"
+}
+[2026-07-28T14:27:56.594Z] [INFO] [MOVE] Moving to (3, 1)
+[2026-07-28T14:27:56.986Z] [DEBUG] [COOLDOWN] Waiting 45s cooldown...
+[2026-07-28T14:28:41.988Z] [INFO] [ACTION_EXEC] [6/6] CRAFT
+  📦 Payload: {
+  "type": "craft",
+  "itemCode": "wooden_shield",
+  "quantity": 1,
+  "workshopX": 3,
+  "workshopY": 1
+}
+[2026-07-28T14:28:41.989Z] [INFO] [CRAFT] Crafting 1x wooden_shield
+[2026-07-28T14:28:42.357Z] [DEBUG] [COOLDOWN] Waiting 5s cooldown...
+[2026-07-28T14:28:47.357Z] [INFO] [QUEUE_END] Queue execution complete for Heolig
+[2026-07-28T14:28:47.358Z] [INFO] [WORKER_FINISH] Task finished successfully!
+[2026-07-28T14:29:50.941Z] [INFO] [WORKER_INIT] Worker initialized for Heolig with objective: CRAFT wooden_shield (x1)
+  📦 Payload: {
+  "type": "CRAFT",
+  "code": "wooden_shield",
+  "quantity": 1
+}
+[2026-07-28T14:29:50.951Z] [INFO] [ENGINE_START] Executing objective: CRAFT wooden_shield (x1)
+  📦 Payload: {
+  "type": "CRAFT",
+  "code": "wooden_shield",
+  "quantity": 1
+}
+[2026-07-28T14:29:50.952Z] [DEBUG] [SEARCH_ITEM] Searching inventory for x1 wooden_shield
+  📦 Payload: {
+  "characterName": "Heolig",
+  "itemCode": "wooden_shield",
+  "found": true,
+  "totalQuantity": 1,
+  "locations": [
+    {
+      "location": "equipped",
+      "slotName": "shield_slot",
+      "quantity": 1
+    }
+  ]
+}
+[2026-07-28T14:29:50.952Z] [INFO] [UNEQUIP_PLAN] Unequipping 1 slot(s) for wooden_shield
+[2026-07-28T14:29:50.952Z] [INFO] [PLAN_BUILT] Generated 1 action(s)
+  📦 Payload: [
+  {
+    "type": "unequip",
+    "slot": "shield"
+  }
+]
+[2026-07-28T14:29:50.953Z] [INFO] [QUEUE_START] Starting execution of 1 queued action(s)
+  📦 Payload: [
+  {
+    "type": "unequip",
+    "slot": "shield"
+  }
+]
+[2026-07-28T14:29:50.953Z] [INFO] [ACTION_EXEC] [1/1] UNEQUIP
+  📦 Payload: {
+  "type": "unequip",
+  "slot": "shield"
+}
+[2026-07-28T14:29:50.953Z] [INFO] [UNEQUIP] Unequipping slot shield
+[2026-07-28T14:29:51.955Z] [DEBUG] [COOLDOWN] Waiting 3s cooldown...
+[2026-07-28T14:29:54.961Z] [INFO] [QUEUE_END] Queue execution complete for Heolig
+[2026-07-28T14:29:54.962Z] [INFO] [WORKER_FINISH] Task finished successfully!

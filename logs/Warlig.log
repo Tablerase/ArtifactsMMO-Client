@@ -1,0 +1,378 @@
+[2026-07-28T13:48:57.110Z] [INFO] [WORKER_INIT] Worker initialized for Warlig with objective: CRAFT wooden_shield (x1)
+  📦 Payload: {
+  "type": "CRAFT",
+  "code": "wooden_shield",
+  "quantity": 1
+}
+[2026-07-28T13:48:57.111Z] [INFO] [ENGINE_START] Executing objective: CRAFT wooden_shield (x1)
+  📦 Payload: {
+  "type": "CRAFT",
+  "code": "wooden_shield",
+  "quantity": 1
+}
+[2026-07-28T13:48:57.112Z] [ERROR] [WORKER_ERROR] Worker failed: Cannot read properties of undefined (reading 'code')
+  📦 Payload: {
+  "name": "TypeError",
+  "message": "Cannot read properties of undefined (reading 'code')",
+  "stack": "TypeError: Cannot read properties of undefined (reading 'code')\n    at AiEngine.craftItemRecursive (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/objectives/aiEngine.ts:132:68)\n    at AiEngine.craft (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/objectives/aiEngine.ts:69:45)\n    at AiEngine.doObjective (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/objectives/aiEngine.ts:48:30)\n    at async self.onmessage (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/character_worker.ts:38:7)"
+}
+[2026-07-28T13:53:32.498Z] [INFO] [WORKER_INIT] Worker initialized for Warlig with objective: CRAFT wooden_shield (x1)
+  📦 Payload: {
+  "type": "CRAFT",
+  "code": "wooden_shield",
+  "quantity": 1
+}
+[2026-07-28T13:53:32.499Z] [INFO] [ENGINE_START] Executing objective: CRAFT wooden_shield (x1)
+  📦 Payload: {
+  "type": "CRAFT",
+  "code": "wooden_shield",
+  "quantity": 1
+}
+[2026-07-28T13:53:32.500Z] [DEBUG] [SEARCH_ITEM] Searching inventory for x1 wooden_shield
+  📦 Payload: {
+  "characterName": "Warlig",
+  "itemCode": "wooden_shield",
+  "found": false,
+  "totalQuantity": 0,
+  "locations": []
+}
+[2026-07-28T13:53:33.593Z] [INFO] [RECIPE_FOUND] Crafting 1x wooden_shield requires ingredients
+  📦 Payload: [
+  {
+    "code": "ash_plank",
+    "quantity": 6
+  }
+]
+[2026-07-28T13:53:33.593Z] [DEBUG] [SEARCH_ITEM] Searching inventory for x6 ash_plank
+  📦 Payload: {
+  "characterName": "Warlig",
+  "itemCode": "ash_plank",
+  "found": false,
+  "totalQuantity": 0,
+  "locations": []
+}
+[2026-07-28T13:53:34.072Z] [INFO] [RECIPE_FOUND] Crafting 6x ash_plank requires ingredients
+  📦 Payload: [
+  {
+    "code": "ash_wood",
+    "quantity": 10
+  }
+]
+[2026-07-28T13:53:34.072Z] [DEBUG] [SEARCH_ITEM] Searching inventory for x60 ash_wood
+  📦 Payload: {
+  "characterName": "Warlig",
+  "itemCode": "ash_wood",
+  "found": false,
+  "totalQuantity": 0,
+  "locations": []
+}
+[2026-07-28T13:53:35.640Z] [INFO] [GATHER_PLAN] Target resource ash_tree at (-1, 0) x60
+[2026-07-28T13:53:36.172Z] [INFO] [WORKSHOP_FOUND] Found woodcutting workshop at (-2, -3)
+[2026-07-28T13:53:36.666Z] [INFO] [WORKSHOP_FOUND] Found gearcrafting workshop at (3, 1)
+[2026-07-28T13:53:36.666Z] [INFO] [PLAN_BUILT] Generated 6 action(s)
+  📦 Payload: [
+  {
+    "type": "move",
+    "x": -1,
+    "y": 0,
+    "name": "Move to ash_tree (-1, 0)"
+  },
+  {
+    "type": "gather",
+    "itemCode": "ash_tree",
+    "times": 60
+  },
+  {
+    "type": "move",
+    "x": -2,
+    "y": -3,
+    "name": "Move to Workshop (-2, -3)"
+  },
+  {
+    "type": "craft",
+    "itemCode": "ash_plank",
+    "quantity": 6,
+    "workshopX": -2,
+    "workshopY": -3
+  },
+  {
+    "type": "move",
+    "x": 3,
+    "y": 1,
+    "name": "Move to Workshop (3, 1)"
+  },
+  {
+    "type": "craft",
+    "itemCode": "wooden_shield",
+    "quantity": 1,
+    "workshopX": 3,
+    "workshopY": 1
+  }
+]
+[2026-07-28T13:53:36.667Z] [INFO] [QUEUE_START] Starting execution of 6 queued action(s)
+  📦 Payload: [
+  {
+    "type": "move",
+    "x": -1,
+    "y": 0,
+    "name": "Move to ash_tree (-1, 0)"
+  },
+  {
+    "type": "gather",
+    "itemCode": "ash_tree",
+    "times": 60
+  },
+  {
+    "type": "move",
+    "x": -2,
+    "y": -3,
+    "name": "Move to Workshop (-2, -3)"
+  },
+  {
+    "type": "craft",
+    "itemCode": "ash_plank",
+    "quantity": 6,
+    "workshopX": -2,
+    "workshopY": -3
+  },
+  {
+    "type": "move",
+    "x": 3,
+    "y": 1,
+    "name": "Move to Workshop (3, 1)"
+  },
+  {
+    "type": "craft",
+    "itemCode": "wooden_shield",
+    "quantity": 1,
+    "workshopX": 3,
+    "workshopY": 1
+  }
+]
+[2026-07-28T13:53:36.667Z] [INFO] [ACTION_EXEC] [1/6] MOVE
+  📦 Payload: {
+  "type": "move",
+  "x": -1,
+  "y": 0,
+  "name": "Move to ash_tree (-1, 0)"
+}
+[2026-07-28T13:53:36.667Z] [INFO] [MOVE] Moving to (-1, 0)
+[2026-07-28T13:53:37.105Z] [DEBUG] [COOLDOWN] Waiting 25s cooldown...
+[2026-07-28T13:56:39.641Z] [INFO] [WORKER_INIT] Worker initialized for Warlig with objective: CRAFT wooden_shield (x1)
+  📦 Payload: {
+  "type": "CRAFT",
+  "code": "wooden_shield",
+  "quantity": 1
+}
+[2026-07-28T13:56:39.642Z] [INFO] [ENGINE_START] Executing objective: CRAFT wooden_shield (x1)
+  📦 Payload: {
+  "type": "CRAFT",
+  "code": "wooden_shield",
+  "quantity": 1
+}
+[2026-07-28T13:56:39.643Z] [DEBUG] [SEARCH_ITEM] Searching inventory for x1 wooden_shield
+  📦 Payload: {
+  "characterName": "Warlig",
+  "itemCode": "wooden_shield",
+  "found": false,
+  "totalQuantity": 0,
+  "locations": []
+}
+[2026-07-28T13:56:40.794Z] [INFO] [RECIPE_FOUND] Crafting 1x wooden_shield requires ingredients
+  📦 Payload: [
+  {
+    "code": "ash_plank",
+    "quantity": 6
+  }
+]
+[2026-07-28T13:56:40.794Z] [DEBUG] [SEARCH_ITEM] Searching inventory for x6 ash_plank
+  📦 Payload: {
+  "characterName": "Warlig",
+  "itemCode": "ash_plank",
+  "found": false,
+  "totalQuantity": 0,
+  "locations": []
+}
+[2026-07-28T13:56:41.289Z] [INFO] [RECIPE_FOUND] Crafting 6x ash_plank requires ingredients
+  📦 Payload: [
+  {
+    "code": "ash_wood",
+    "quantity": 10
+  }
+]
+[2026-07-28T13:56:41.290Z] [DEBUG] [SEARCH_ITEM] Searching inventory for x60 ash_wood
+  📦 Payload: {
+  "characterName": "Warlig",
+  "itemCode": "ash_wood",
+  "found": false,
+  "totalQuantity": 0,
+  "locations": []
+}
+[2026-07-28T13:56:42.441Z] [ERROR] [WORKER_ERROR] Worker failed: [HTTP 429] Rate limit exceeded: 10 per 1 second
+  📦 Payload: {
+  "name": "ApiError",
+  "message": "Rate limit exceeded: 10 per 1 second",
+  "stack": "ApiError: Rate limit exceeded: 10 per 1 second\n    at endpointRequest (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/api.ts:83:11)\n    at async AiEngine.gather (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/objectives/aiEngine.ts:86:18)\n    at async AiEngine.bestAction (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/objectives/aiEngine.ts:127:14)\n    at async AiEngine.craftItemRecursive (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/objectives/aiEngine.ts:182:23)\n    at async AiEngine.craftItemRecursive (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/objectives/aiEngine.ts:195:25)\n    at async AiEngine.craftItemRecursive (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/objectives/aiEngine.ts:195:25)\n    at async AiEngine.craft (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/objectives/aiEngine.ts:73:34)\n    at async AiEngine.doObjective (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/objectives/aiEngine.ts:52:19)\n    at async self.onmessage (file:///home/rcutte/Work/tries/2026-07-22-ArtifactsMMO/Client/character_worker.ts:31:7)"
+}
+[2026-07-28T14:29:50.972Z] [INFO] [WORKER_INIT] Worker initialized for Warlig with objective: CRAFT wooden_shield (x1)
+  📦 Payload: {
+  "type": "CRAFT",
+  "code": "wooden_shield",
+  "quantity": 1
+}
+[2026-07-28T14:29:50.974Z] [INFO] [ENGINE_START] Executing objective: CRAFT wooden_shield (x1)
+  📦 Payload: {
+  "type": "CRAFT",
+  "code": "wooden_shield",
+  "quantity": 1
+}
+[2026-07-28T14:29:50.974Z] [DEBUG] [SEARCH_ITEM] Searching inventory for x1 wooden_shield
+  📦 Payload: {
+  "characterName": "Warlig",
+  "itemCode": "wooden_shield",
+  "found": false,
+  "totalQuantity": 0,
+  "locations": []
+}
+[2026-07-28T14:29:51.978Z] [INFO] [RECIPE_FOUND] Crafting 1x wooden_shield requires ingredients
+  📦 Payload: [
+  {
+    "code": "ash_plank",
+    "quantity": 6
+  }
+]
+[2026-07-28T14:29:51.978Z] [DEBUG] [SEARCH_ITEM] Searching inventory for x6 ash_plank
+  📦 Payload: {
+  "characterName": "Warlig",
+  "itemCode": "ash_plank",
+  "found": false,
+  "totalQuantity": 0,
+  "locations": []
+}
+[2026-07-28T14:29:52.400Z] [INFO] [RECIPE_FOUND] Crafting 6x ash_plank requires ingredients
+  📦 Payload: [
+  {
+    "code": "ash_wood",
+    "quantity": 10
+  }
+]
+[2026-07-28T14:29:52.400Z] [DEBUG] [SEARCH_ITEM] Searching inventory for x60 ash_wood
+  📦 Payload: {
+  "characterName": "Warlig",
+  "itemCode": "ash_wood",
+  "found": false,
+  "totalQuantity": 0,
+  "locations": []
+}
+[2026-07-28T14:29:54.139Z] [INFO] [GATHER_PLAN] Target resource ash_tree at (-1, 0) x60
+[2026-07-28T14:29:54.642Z] [INFO] [WORKSHOP_FOUND] Found woodcutting workshop at (-2, -3)
+[2026-07-28T14:29:55.091Z] [INFO] [WORKSHOP_FOUND] Found gearcrafting workshop at (3, 1)
+[2026-07-28T14:29:55.091Z] [INFO] [PLAN_BUILT] Generated 6 action(s)
+  📦 Payload: [
+  {
+    "type": "move",
+    "x": -1,
+    "y": 0,
+    "name": "Move to ash_tree (-1, 0)"
+  },
+  {
+    "type": "gather",
+    "itemCode": "ash_tree",
+    "times": 60
+  },
+  {
+    "type": "move",
+    "x": -2,
+    "y": -3,
+    "name": "Move to Workshop (-2, -3)"
+  },
+  {
+    "type": "craft",
+    "itemCode": "ash_plank",
+    "quantity": 6,
+    "workshopX": -2,
+    "workshopY": -3
+  },
+  {
+    "type": "move",
+    "x": 3,
+    "y": 1,
+    "name": "Move to Workshop (3, 1)"
+  },
+  {
+    "type": "craft",
+    "itemCode": "wooden_shield",
+    "quantity": 1,
+    "workshopX": 3,
+    "workshopY": 1
+  }
+]
+[2026-07-28T14:29:55.093Z] [INFO] [QUEUE_START] Starting execution of 6 queued action(s)
+  📦 Payload: [
+  {
+    "type": "move",
+    "x": -1,
+    "y": 0,
+    "name": "Move to ash_tree (-1, 0)"
+  },
+  {
+    "type": "gather",
+    "itemCode": "ash_tree",
+    "times": 60
+  },
+  {
+    "type": "move",
+    "x": -2,
+    "y": -3,
+    "name": "Move to Workshop (-2, -3)"
+  },
+  {
+    "type": "craft",
+    "itemCode": "ash_plank",
+    "quantity": 6,
+    "workshopX": -2,
+    "workshopY": -3
+  },
+  {
+    "type": "move",
+    "x": 3,
+    "y": 1,
+    "name": "Move to Workshop (3, 1)"
+  },
+  {
+    "type": "craft",
+    "itemCode": "wooden_shield",
+    "quantity": 1,
+    "workshopX": 3,
+    "workshopY": 1
+  }
+]
+[2026-07-28T14:29:55.093Z] [INFO] [ACTION_EXEC] [1/6] MOVE
+  📦 Payload: {
+  "type": "move",
+  "x": -1,
+  "y": 0,
+  "name": "Move to ash_tree (-1, 0)"
+}
+[2026-07-28T14:29:55.093Z] [DEBUG] [MOVE_SKIP] Already at destination (-1, 0).
+[2026-07-28T14:29:55.093Z] [INFO] [ACTION_EXEC] [2/6] GATHER
+  📦 Payload: {
+  "type": "gather",
+  "itemCode": "ash_tree",
+  "times": 60
+}
+[2026-07-28T14:29:55.093Z] [INFO] [GATHER_START] Gathering ash_tree (60 times)
+[2026-07-28T14:29:55.479Z] [INFO] [GATHER_STEP] Gather 1/60 complete. Cooldown: 30s
+  📦 Payload: {
+  "cooldown": 30,
+  "drops": [
+    {
+      "code": "ash_wood",
+      "quantity": 1
+    },
+    {
+      "code": "apple",
+      "quantity": 1
+    }
+  ]
+}

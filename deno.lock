@@ -1,3 +1,11 @@
 {
-  "version": "5"
+  "version": "5",
+  "specifiers": {
+    "jsr:@std/fmt@*": "1.0.10"
+  },
+  "jsr": {
+    "@std/fmt@1.0.10": {
+      "integrity": "90dfba288802ac6de82fb31d0917eb9e4450b9925b954d5e51fc29ac07419db5"
+    }
+  }
 }
