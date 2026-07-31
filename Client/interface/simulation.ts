@@ -1,3 +1,5 @@
+import { CharacterSchema } from "./character.ts";
+
 export interface FakeCharacterSchema {
   level: number; // 1 to 50
 
@@ -21,6 +23,38 @@ export interface FakeCharacterSchema {
   utility1_slot_quantity?: number; // 1 to 100
   utility2_slot?: string | null;
   utility2_slot_quantity?: number; // 1 to 100
+}
+
+export function toFakeCharacter(char: CharacterSchema): FakeCharacterSchema {
+  // Convert empty string "" to null for the simulation API
+  const slot = (
+    val?: string | null,
+  ) => (val && val.trim().length > 0 ? val : null);
+
+  return {
+    level: char.level,
+    weapon_slot: slot(char.weapon_slot),
+    shield_slot: slot(char.shield_slot),
+    helmet_slot: slot(char.helmet_slot),
+    body_armor_slot: slot(char.body_armor_slot),
+    leg_armor_slot: slot(char.leg_armor_slot),
+    boots_slot: slot(char.boots_slot),
+    rune_slot: slot(char.rune_slot),
+    amulet_slot: slot(char.amulet_slot),
+    ring1_slot: slot(char.ring1_slot),
+    ring2_slot: slot(char.ring2_slot),
+    artifact1_slot: slot(char.artifact1_slot),
+    artifact2_slot: slot(char.artifact2_slot),
+    artifact3_slot: slot(char.artifact3_slot),
+    utility1_slot: slot(char.utility1_slot),
+    utility1_slot_quantity: char.utility1_slot
+      ? char.utility1_slot_quantity
+      : undefined,
+    utility2_slot: slot(char.utility2_slot),
+    utility2_slot_quantity: char.utility2_slot
+      ? char.utility2_slot_quantity
+      : undefined,
+  };
 }
 
 export interface CombatSimulationRequestSchema {

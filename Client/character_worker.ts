@@ -1,11 +1,15 @@
+// Worker thread context
 declare const self: DedicatedWorkerGlobalScope;
+
+// build/init gameData static object in worker thread
+import { gameData } from "./utils/gameData.ts";
 
 import type {
   MainToWorkerMessage,
   WorkerToMainMessage,
 } from "./interface/messages.ts";
 import { ApiError } from "./api.ts";
-import { AiEngine } from "./objectives/aiEngine.ts";
+import { AiEngine } from "./aiEngine.ts";
 import { Logger } from "./utils/logger.ts";
 
 function sendToMain(msg: WorkerToMainMessage) {
@@ -19,6 +23,7 @@ self.onmessage = async (event: MessageEvent<MainToWorkerMessage>) => {
     const logger = new Logger(data.character.name);
 
     try {
+      await gameData.loadAllData();
       await logger.info(
         "WORKER_INIT",
         `Worker initialized for ${data.character.name} with objective: ${data.objective.type} ${data.objective.code} (x${data.objective.quantity})`,

@@ -27,7 +27,10 @@ export async function executeQueue(
     try {
       switch (action.type) {
         case "move":
-          if (character.x === action.x && character.y === action.y) {
+          if (
+            action.x !== undefined && action.y !== undefined &&
+            character.x === action.x && character.y === action.y
+          ) {
             await logger?.debug(
               "MOVE_SKIP",
               `Already at destination (${action.x}, ${action.y}).`,
@@ -35,8 +38,22 @@ export async function executeQueue(
             continue;
           }
 
-          await logger?.info("MOVE", `Moving to (${action.x}, ${action.y})`);
-          responseData = await api.move(character.name, action.x, action.y);
+          await logger?.info("MOVE", `Moving to destination`, {
+            x: action.x,
+            y: action.y,
+          });
+          responseData = await api.move(character.name, {
+            x: action.x,
+            y: action.y,
+          });
+          break;
+
+        case "rest":
+          await logger?.info(
+            "REST",
+            `Resting to recover HP (${character.hp}/${character.max_hp} HP)`,
+          );
+          responseData = await api.rest(character.name);
           break;
 
         case "gather":
@@ -54,7 +71,9 @@ export async function executeQueue(
             const cooldown = responseData?.cooldown?.remaining_seconds ?? 3;
             await logger?.info(
               "GATHER_STEP",
-              `Gather ${g + 1}/${action.times} complete. Cooldown: ${cooldown}s`,
+              `Gather ${
+                g + 1
+              }/${action.times} complete. Cooldown: ${cooldown}s`,
               { cooldown, drops: responseData?.details?.items },
             );
             await sleep(cooldown * 1000);
@@ -62,7 +81,7 @@ export async function executeQueue(
           continue;
 
         case "fight":
-          await logger?.info("FIGHT", `Fighting monster ${action.monsterCode}`);
+          await logger?.info("FIGHT", `Fighting monster`);
           responseData = await api.fight(character.name);
           break;
 
@@ -95,7 +114,41 @@ export async function executeQueue(
             slot: action.slot,
           }]);
           break;
+
+        case "accept_task":
+          await logger?.info("ACCEPT_TASK", `Accepting new task from Tasks Master`);
+          responseData = await api.acceptTask(character.name);
+          break;
+
+        case "complete_task":
+          await logger?.info("COMPLETE_TASK", `Completing task and claiming rewards`);
+          responseData = await api.completeTask(character.name);
+          break;
+
+        case "trade_task":
+          await logger?.info("TRADE_TASK", `Trading ${action.quantity}x ${action.itemCode} for task requirement`);
+          responseData = await api.tradeTask(character.name, action.itemCode, action.quantity);
+          break;
+
+        case "cancel_task":
+          await logger?.info("CANCEL_TASK", `Cancelling active task`);
+          responseData = await api.cancelTask(character.name);
+          break;
+
+        case "exchange_task":
+          await logger?.info("EXCHANGE_TASK", `Exchanging 6 Task Coins for rewards`);
+          responseData = await api.exchangeTaskCoins(character.name);
+          break;
+
+        default:
+          await logger?.error(
+            "UNKNOWN_ACTION",
+            `Unknown action type`,
+            action,
+          );
+          break;
       }
+
 
       if (responseData?.character) {
         character = responseData.character;
@@ -134,4 +187,3 @@ export async function executeQueue(
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-

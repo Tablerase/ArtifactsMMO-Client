@@ -10,6 +10,36 @@ export interface CooldownResponse {
   "cooldown": CooldownSchema;
 }
 
+import type { CharacterSchema } from "./character.ts";
+import type { MapSchema } from "./map.ts";
+
+export interface DestinationSchema {
+  x?: number;
+  y?: number;
+  map_id?: number;
+}
+
+export interface CharacterMovementDataSchema {
+  cooldown: CooldownSchema;
+  destination: MapSchema;
+  path: [number, number][];
+  character: CharacterSchema;
+}
+
+export interface CharacterMovementResponseSchema {
+  data: CharacterMovementDataSchema;
+}
+
+export interface CharacterRestDataSchema {
+  cooldown: CooldownSchema;
+  hp_restored: number;
+  character: CharacterSchema;
+}
+
+export interface CharacterRestResponseSchema {
+  data: CharacterRestDataSchema;
+}
+
 export type ActionType =
   | "move"
   | "fight"

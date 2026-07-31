@@ -1,6 +1,26 @@
 import type { CharacterSchema, ItemSlotType } from "./interface/character.ts";
-import type { CooldownSchema } from "./interface/action.ts";
+import type {
+  CharacterMovementDataSchema,
+  CharacterRestDataSchema,
+  CooldownSchema,
+  DestinationSchema,
+} from "./interface/action.ts";
 import type { ItemSchema } from "./interface/item.ts";
+import { MapContentType, MapLayer, MapSchema } from "./interface/map.ts";
+import { ResourceSchema } from "./interface/resource.ts";
+import { MonsterSchema } from "./interface/monster.ts";
+import {
+  CombatSimulationDataSchema,
+  CombatSimulationRequestSchema,
+} from "./interface/simulation.ts";
+import { RateLimitsDataSchema } from "./interface/rates.ts";
+import type {
+  RewardDataSchema,
+  TaskCancelledSchema,
+  TaskDataSchema,
+  TaskTradeDataSchema,
+} from "./interface/task.ts";
+
 
 export interface EquipSchema {
   code: string;
@@ -25,18 +45,6 @@ export interface EquipmentTransactionSchema {
   character: CharacterSchema;
 }
 
-import { MapContentType, MapLayer, MapSchema } from "./interface/map.ts";
-import { ResourceSchema } from "./interface/resource.ts";
-import {
-  MonsterResponseSchema,
-  MonsterSchema,
-  MonstersPageResponseSchema,
-} from "./interface/monster.ts";
-import {
-  CombatSimulationDataSchema,
-  CombatSimulationRequestSchema,
-} from "./interface/simulation.ts";
-
 const BASE_URL = "https://api.artifactsmmo.com";
 const TOKEN = Deno.env.get("ARTIFACTS_TOKEN");
 
@@ -55,6 +63,7 @@ export class ApiError extends Error {
 async function endpointRequest<T>(
   path: string,
   options: RequestInit = {},
+  retryCount: number = 0,
 ): Promise<T> {
   const url = `${BASE_URL}${path}`;
 
@@ -68,6 +77,15 @@ async function endpointRequest<T>(
 
   const result = await fetch(url, { ...options, headers });
   const json = await result.json();
+
+  if (result.status === 429 && retryCount < 3) {
+    const retryAfterSeconds = json.error?.data?.reset ?? 2;
+    console.warn(
+      `⚠️ Rate limit hit on ${path}. Retrying in ${retryAfterSeconds}s...`,
+    );
+    await new Promise((r) => setTimeout(r, retryAfterSeconds * 1000));
+    return endpointRequest<T>(path, options, retryCount + 1);
+  }
 
   if (!result.ok || json.error) {
     const errorCode = typeof json.error === "object" && json.error?.code
@@ -93,16 +111,42 @@ export const api = {
   getCharacter: (name: string) =>
     endpointRequest<CharacterSchema>(`/characters/${name}`),
 
+  getRateLimits: () => endpointRequest<RateLimitsDataSchema>("/my/rates"),
+
   // Actions
-  move: (character: string, x: number, y: number) =>
-    endpointRequest<any>(`/my/${character}/action/move`, {
+
+  /**
+   * Moves character to destination coordinates (x, y) or map_id
+   */
+  move: (
+    character: string,
+    destination: DestinationSchema | { x: number; y: number } | number,
+  ) => {
+    const body: DestinationSchema = typeof destination === "number"
+      ? { map_id: destination }
+      : destination;
+
+    return endpointRequest<CharacterMovementDataSchema>(
+      `/my/${character}/action/move`,
+      {
+        method: "POST",
+        body: JSON.stringify(body),
+      },
+    );
+  },
+
+  /**
+   * Rest character to recover HP (1 second per 5 HP restored, min 3s)
+   */
+  rest: (character: string) =>
+    endpointRequest<CharacterRestDataSchema>(`/my/${character}/action/rest`, {
       method: "POST",
-      body: JSON.stringify({ x, y }),
     }),
 
-  fight: (character: string) =>
+  fight: (character: string, characters?: string[]) =>
     endpointRequest<any>(`/my/${character}/action/fight`, {
       method: "POST",
+      body: JSON.stringify(characters ? { participants: characters } : {}),
     }),
 
   gather: (character: string) =>
@@ -134,31 +178,76 @@ export const api = {
       },
     ),
 
+  // Tasks API
+  acceptTask: (character: string) =>
+    endpointRequest<TaskDataSchema>(`/my/${character}/action/task/new`, {
+      method: "POST",
+    }),
+
+  completeTask: (character: string) =>
+    endpointRequest<RewardDataSchema>(`/my/${character}/action/task/complete`, {
+      method: "POST",
+    }),
+
+  tradeTask: (character: string, code: string, quantity: number) =>
+    endpointRequest<TaskTradeDataSchema>(`/my/${character}/action/task/trade`, {
+      method: "POST",
+      body: JSON.stringify({ code, quantity }),
+    }),
+
+  cancelTask: (character: string) =>
+    endpointRequest<TaskCancelledSchema>(`/my/${character}/action/task/cancel`, {
+      method: "POST",
+    }),
+
+  exchangeTaskCoins: (character: string) =>
+    endpointRequest<RewardDataSchema>(`/my/${character}/action/task/exchange`, {
+      method: "POST",
+    }),
+
+
   // Items / Catalog
+
   getItem: (code: string) => endpointRequest<ItemSchema>(`/items/${code}`),
+  getItemsPage: (page = 1, size = 100) =>
+    endpointRequest<ItemSchema[]>(`/items?page=${page}&size=${size}`),
 
   // Resources
+
   getResources: (page: number = 1, drop?: string, min_level?: number) =>
     endpointRequest<ResourceSchema[]>(
       `/resources?page=${page}${drop ? `&drop=${drop}` : ""}${
         min_level ? `&min_level=${min_level}` : ""
       }`,
     ),
+  getResourcesPage: (page = 1, size = 100) =>
+    endpointRequest<ResourceSchema[]>(`/resources?page=${page}&size=${size}`),
 
   // Monsters
+
   getMonster: (code: string) =>
     endpointRequest<MonsterSchema>(`/monsters/${code}`),
   getMonstersByDrop: (itemCode: string) =>
     endpointRequest<MonsterSchema[]>(`/monsters?drop=${itemCode}`),
+  getMonstersPage: (page = 1, size = 100) =>
+    endpointRequest<MonsterSchema[]>(`/monsters?page=${page}&size=${size}`),
 
   // Simulation
-  simulateCombat: (req: CombatSimulationRequestSchema) =>
-    endpointRequest<CombatSimulationDataSchema>("/simulation/fight", {
+
+  simulateCombat: async (req: CombatSimulationRequestSchema) => {
+    // ⏳ Ensure at least 1050ms between simulation requests across all worker calls
+    await throttler.waitForScope("simulation", 1050);
+    return endpointRequest<CombatSimulationDataSchema>("/simulation/fight", {
       method: "POST",
       body: JSON.stringify(req),
-    }),
+    });
+  },
 
   //Maps
+
+  getMapsPage: (page = 1, size = 100) =>
+    endpointRequest<MapSchema[]>(`/maps?page=${page}&size=${size}`),
+
   getMaps: (
     content_code?: string,
     content_type?: MapContentType,
@@ -175,11 +264,33 @@ export const api = {
     return endpointRequest<MapSchema[]>(`/maps?${params.toString()}`);
   },
 
-  // 2. Get map info by (x, y) coordinates & layer
   getMapByPosition: (layer: MapLayer, x: number, y: number) =>
     endpointRequest<MapSchema>(`/maps/${layer}/${x}/${y}`),
 
-  // 3. Get map info by Map ID
   getMapById: (map_id: number) =>
     endpointRequest<MapSchema>(`/maps/id/${map_id}`),
 };
+
+class ScopeThrottler {
+  private lastCallTimes = new Map<string, number>();
+
+  /**
+   * Waits if necessary to respect minimum delay between requests in a scope
+   * @param scope Identifier for the endpoint group (e.g. "simulation" = 1000ms delay)
+   * @param minDelayMs Minimum milliseconds required between calls
+   */
+  async waitForScope(scope: string, minDelayMs: number) {
+    const now = Date.now();
+    const lastTime = this.lastCallTimes.get(scope) || 0;
+    const elapsed = now - lastTime;
+
+    if (elapsed < minDelayMs) {
+      const waitMs = minDelayMs - elapsed;
+      await new Promise((resolve) => setTimeout(resolve, waitMs));
+    }
+
+    this.lastCallTimes.set(scope, Date.now());
+  }
+}
+
+const throttler = new ScopeThrottler();

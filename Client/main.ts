@@ -5,12 +5,16 @@ import {
   WorkerToMainMessage,
 } from "./interface/messages.ts";
 import { c } from "./utils/logger.ts";
+import { gameData } from "./utils/gameData.ts";
 
 const TOKEN = Deno.env.get("ARTIFACTS_TOKEN");
 
 if (!TOKEN) {
   throw new Error("ARTIFACTS_TOKEN environment variable is not set.");
 }
+
+// 🚀 Pre-load all game metadata (Items, Maps, Resources) once at startup!
+await gameData.loadAllData();
 
 // Retrieving Characters infos
 const characters: CharacterSchema[] = await api.getCharacters();
@@ -41,9 +45,9 @@ for (const character of characters) {
     type: "START_BOT",
     character: character,
     objective: {
-      type: "CRAFT",
-      code: "wooden_shield",
-      quantity: 1,
+      type: "COMBAT",
+      code: "yellow_slime",
+      quantity: 8,
     },
   };
 
