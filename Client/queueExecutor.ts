@@ -116,18 +116,31 @@ export async function executeQueue(
           break;
 
         case "accept_task":
-          await logger?.info("ACCEPT_TASK", `Accepting new task from Tasks Master`);
+          await logger?.info(
+            "ACCEPT_TASK",
+            `Accepting new task from Tasks Master`,
+          );
           responseData = await api.acceptTask(character.name);
           break;
 
         case "complete_task":
-          await logger?.info("COMPLETE_TASK", `Completing task and claiming rewards`);
+          await logger?.info(
+            "COMPLETE_TASK",
+            `Completing task and claiming rewards`,
+          );
           responseData = await api.completeTask(character.name);
           break;
 
         case "trade_task":
-          await logger?.info("TRADE_TASK", `Trading ${action.quantity}x ${action.itemCode} for task requirement`);
-          responseData = await api.tradeTask(character.name, action.itemCode, action.quantity);
+          await logger?.info(
+            "TRADE_TASK",
+            `Trading ${action.quantity}x ${action.itemCode} for task requirement`,
+          );
+          responseData = await api.tradeTask(
+            character.name,
+            action.itemCode,
+            action.quantity,
+          );
           break;
 
         case "cancel_task":
@@ -136,7 +149,10 @@ export async function executeQueue(
           break;
 
         case "exchange_task":
-          await logger?.info("EXCHANGE_TASK", `Exchanging 6 Task Coins for rewards`);
+          await logger?.info(
+            "EXCHANGE_TASK",
+            `Exchanging 6 Task Coins for rewards`,
+          );
           responseData = await api.exchangeTaskCoins(character.name);
           break;
 
@@ -148,7 +164,6 @@ export async function executeQueue(
           );
           break;
       }
-
 
       if (responseData?.character) {
         character = responseData.character;

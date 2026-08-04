@@ -45,7 +45,7 @@ for (const character of characters) {
     type: "START_BOT",
     character: character,
     objective: {
-      type: "COMBAT",
+      type: "TASK",
       code: "yellow_slime",
       quantity: 8,
     },

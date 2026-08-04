@@ -1,7 +1,8 @@
 export type ObjectiveType =
   | "CRAFT"
   | "COMBAT"
-  | "GATHERING";
+  | "GATHERING"
+  | "TASK";
 
 export interface Objective {
   type: ObjectiveType;

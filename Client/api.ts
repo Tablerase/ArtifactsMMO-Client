@@ -5,9 +5,9 @@ import type {
   CooldownSchema,
   DestinationSchema,
 } from "./interface/action.ts";
-import type { ItemSchema } from "./interface/item.ts";
+import type { CraftSkill, ItemSchema } from "./interface/item.ts";
 import { MapContentType, MapLayer, MapSchema } from "./interface/map.ts";
-import { ResourceSchema } from "./interface/resource.ts";
+import { GatheringSkill, ResourceSchema } from "./interface/resource.ts";
 import { MonsterSchema } from "./interface/monster.ts";
 import {
   CombatSimulationDataSchema,
@@ -18,9 +18,10 @@ import type {
   RewardDataSchema,
   TaskCancelledSchema,
   TaskDataSchema,
+  TaskFullSchema,
   TaskTradeDataSchema,
+  TaskType,
 } from "./interface/task.ts";
-
 
 export interface EquipSchema {
   code: string;
@@ -179,6 +180,28 @@ export const api = {
     ),
 
   // Tasks API
+  getTasks: (
+    page: number = 1,
+    size: number = 50,
+    max_level?: number,
+    min_level?: number,
+    skill?: CraftSkill | GatheringSkill,
+    type?: TaskType,
+  ) => {
+    const params = new URLSearchParams({
+      "page": page.toString(),
+      "size": size.toString(),
+    });
+    if (skill) params.append("skill", skill);
+    if (type) params.append("type", type);
+    if (max_level) params.append("max_level", max_level.toString());
+    if (min_level) params.append("min_level", min_level.toString());
+
+    return endpointRequest<TaskFullSchema[]>(
+      `/tasks/list?${params.toString()}`,
+    );
+  },
+
   acceptTask: (character: string) =>
     endpointRequest<TaskDataSchema>(`/my/${character}/action/task/new`, {
       method: "POST",
@@ -196,15 +219,17 @@ export const api = {
     }),
 
   cancelTask: (character: string) =>
-    endpointRequest<TaskCancelledSchema>(`/my/${character}/action/task/cancel`, {
-      method: "POST",
-    }),
+    endpointRequest<TaskCancelledSchema>(
+      `/my/${character}/action/task/cancel`,
+      {
+        method: "POST",
+      },
+    ),
 
   exchangeTaskCoins: (character: string) =>
     endpointRequest<RewardDataSchema>(`/my/${character}/action/task/exchange`, {
       method: "POST",
     }),
-
 
   // Items / Catalog
 

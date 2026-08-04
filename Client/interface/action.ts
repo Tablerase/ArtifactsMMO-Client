@@ -49,7 +49,12 @@ export type ActionType =
   | "equip"
   | "unequip"
   | "deposit_bank"
-  | "withdraw_bank";
+  | "withdraw_bank"
+  | "accept_task"
+  | "complete_task"
+  | "trade_task"
+  | "cancel_task"
+  | "exchange_task";
 
 export interface MovePayload {
   x: number;
@@ -94,6 +99,11 @@ export type ActionPayloadMap = {
   unequip: UnequipPayload[];
   deposit_bank: { code: string; quantity: number }[];
   withdraw_bank: { code: string; quantity: number }[];
+  accept_task: Record<string, never>;
+  complete_task: Record<string, never>;
+  trade_task: { code: string; quantity: number };
+  cancel_task: Record<string, never>;
+  exchange_task: Record<string, never>;
 };
 
 export interface CharacterAction<T extends ActionType = ActionType> {

@@ -10,6 +10,8 @@ import { gameData } from "./utils/gameData.ts";
 import { MonsterSchema } from "./interface/monster.ts";
 import { toFakeCharacter } from "./interface/simulation.ts";
 import { simulateCombatLocal } from "./utils/combatSimulator.ts";
+import { MapSchema } from "./interface/map.ts";
+import { TaskFullSchema } from "./interface/task.ts";
 
 export class AiEngine {
   character: CharacterSchema;
@@ -59,7 +61,19 @@ export class AiEngine {
         queue.push(...resQueue);
         break;
       }
+      case "TASK": {
+        const resQueue = await this.task(
+          this.objective.quantity,
+          this.objective.code,
+        );
+        queue.push(...resQueue);
+        break;
+      }
       default:
+        await this.logger?.info(
+          "OBJECTIVE",
+          `Unhandled objective type: ${this.objective.type}`,
+        );
         break;
     }
 
@@ -402,10 +416,95 @@ export class AiEngine {
     return actionQueue;
   }
 
-  async task(quantity: number) {
+  private async taskActions(taskToDo: TaskFullSchema): Promise<QueuedAction[]> {
     const actionQueue: QueuedAction[] = [];
-    // Recover tasks
 
+    let taskLocation: MapSchema[];
+    let taskMasterLocation: MapSchema | undefined;
+    if (taskToDo?.type == "monsters") {
+      taskLocation = gameData.getMonsterMaps(taskToDo.code);
+      taskMasterLocation = gameData.getTaskMasterLocationByType(taskToDo.type);
+    } else if (taskToDo?.type == "items") {
+      taskLocation = gameData.getResourceMaps(taskToDo.code);
+      taskMasterLocation = gameData.getTaskMasterLocationByType(taskToDo.type);
+    } else return [];
+
+    if (!taskMasterLocation) {
+      this.logger?.warn(
+        "TASK",
+        "Task master couldnt be found",
+        taskToDo,
+      );
+      return [];
+    }
+    // Go to task master
+    actionQueue.push({
+      type: "move",
+      x: taskMasterLocation.x,
+      y: taskMasterLocation.y,
+    });
+    // Accept task
+    actionQueue.push({
+      type: "accept_task",
+    });
+    // Executing the task
+    if (taskToDo.type === "monsters") {
+      actionQueue.push(
+        ...await this.combat(taskToDo.code, taskToDo.min_quantity),
+      );
+    } else {
+      actionQueue.push(
+        ...await this.craft(taskToDo.code, taskToDo.min_quantity),
+      );
+    }
+    // Go complete the task
+    actionQueue.push({
+      type: "move",
+      x: taskMasterLocation.x,
+      y: taskMasterLocation.y,
+    });
+    actionQueue.push({
+      type: "complete_task",
+    });
     return actionQueue;
+  }
+
+  private bestTask(tasks: TaskFullSchema[]) {
+    // TODO: best task value / coin level / durations
+    if (tasks.length <= 0) return null;
+    return tasks[tasks.length - 1];
+  }
+
+  async task(quantity: number, taskCode: string) {
+    const actionQueue: QueuedAction[] = [];
+
+    if (taskCode !== "unknown") {
+      const taskToDo = gameData.getTask(taskCode);
+      if (!taskToDo) {
+        await this.logger?.warn("TASK", "Task couldnt be found", taskCode);
+        return actionQueue;
+      }
+      actionQueue.push(...await this.taskActions(taskToDo));
+      return actionQueue;
+    } else {
+      // Recover tasks
+      const availableTasks = gameData.getTasksByMaxLevel(this.character.level);
+
+      // Find best tasks value/coin/level/durations
+      const taskToDo = this.bestTask(availableTasks);
+      if (!taskToDo) {
+        await this.logger?.warn(
+          "TASK",
+          "No appropriate task found",
+          availableTasks,
+        );
+        return [];
+      }
+      // Create queue for tasks
+      for (let i = 0; i < quantity; i++) {
+        actionQueue.push(...await this.taskActions(taskToDo));
+      }
+      return actionQueue;
+    }
   }
 }

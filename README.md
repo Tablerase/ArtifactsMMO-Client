@@ -1,6 +1,10 @@
 # ArtifactsMMO
 
-...
+This repo is a client made to play with the Artifacts API to learn and experiment with Typescript and Deno.
+
+<img align="right" width="40%" src="https://docs.artifactsmmo.com/_astro/overview.DgVfrCNj_1MLHTp.webp"/>
+
+Artifacts is a sandbox MMORPG built for developers where every action is an API call. Move, fight, craft, trade — all through HTTP endpoints you call from any programming language. Automate your characters, build custom tools, and compete on the leaderboard.
 
 ## Running the Project
 
@@ -50,4 +54,17 @@ flowchart TD
         subgraph Thread3["Worker Thread"]
             W3[Delig Worker] -->|postMessage| Manager
         end
+```
+
+### Logs
+
+Each character workers has it's own log for easier debugging
+
+```bash
+# jq : json query (formatter)
+## -R: raw input
+## -r: raw output
+## fromjson?: avoid error in case of none json Target
+## // . : display plain text
+tail -f ./logs/<character_log>.log | jq -R -r 'fromjson? // .'
 ```
