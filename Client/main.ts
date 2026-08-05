@@ -5,7 +5,7 @@ import {
   WorkerToMainMessage,
 } from "./interface/messages.ts";
 import { c } from "./utils/logger.ts";
-import { gameData } from "./utils/gameData.ts";
+import { gameData } from "./utils/game-data.ts";
 
 const TOKEN = Deno.env.get("ARTIFACTS_TOKEN");
 
@@ -23,7 +23,7 @@ const activeWorkers: Worker[] = [];
 
 for (const character of characters) {
   const worker = new Worker(
-    import.meta.resolve("./character_worker.ts"),
+    import.meta.resolve("./character-worker.ts"),
     { type: "module" },
   );
 
@@ -46,8 +46,8 @@ for (const character of characters) {
     character: character,
     objective: {
       type: "TASK",
-      code: "yellow_slime",
-      quantity: 8,
+      code: "unknown",
+      quantity: 1,
     },
   };
 

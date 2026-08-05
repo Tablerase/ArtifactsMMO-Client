@@ -3,13 +3,12 @@ import { ItemSchema } from "./interface/item.ts";
 import { Objective } from "./interface/objective.ts";
 import { QueuedAction } from "./interface/queue.ts";
 import { GatheringSkill, ResourceSchema } from "./interface/resource.ts";
-import { executeQueue } from "./queueExecutor.ts";
-import { findItemOnCharacter } from "./utils/search_items.ts";
+import { executeQueue } from "./queue-executor.ts";
+import { findItemOnCharacter } from "./utils/search-items.ts";
 import type { Logger } from "./utils/logger.ts";
-import { gameData } from "./utils/gameData.ts";
+import { gameData } from "./utils/game-data.ts";
 import { MonsterSchema } from "./interface/monster.ts";
-import { toFakeCharacter } from "./interface/simulation.ts";
-import { simulateCombatLocal } from "./utils/combatSimulator.ts";
+import { simulateCombatLocal } from "./utils/combat-simulator.ts";
 import { MapSchema } from "./interface/map.ts";
 import { TaskFullSchema } from "./interface/task.ts";
 
@@ -388,17 +387,18 @@ export class AiEngine {
     });
 
     // Fight and Rest till quantity reached
+    // TODO: Maybe action loop refactoring because in case of unexpected death break action queue because move to monster is needed
     let remainingQuantity = quantity;
     let charHP = this.character.hp;
     while (remainingQuantity > 0) {
       const possibleFight = Math.floor(
         charHP / (charHP - simulatedCombat.avgPlayerHpRemaining),
       );
-      console.log(
-        `possibleFight: ${possibleFight}, avgPlayerHpRemaining: ${simulatedCombat.avgPlayerHpRemaining}, hp: ${charHP} ratio: ${
-          charHP / (charHP - simulatedCombat.avgPlayerHpRemaining)
-        }`,
-      );
+      // console.log(
+      //   `possibleFight: ${possibleFight}, avgPlayerHpRemaining: ${simulatedCombat.avgPlayerHpRemaining}, hp: ${charHP} ratio: ${
+      //     charHP / (charHP - simulatedCombat.avgPlayerHpRemaining)
+      //   }`,
+      // );
       if (possibleFight >= 1) {
         for (let i = 0; i < possibleFight; i++) {
           actionQueue.push({
@@ -437,16 +437,24 @@ export class AiEngine {
       );
       return [];
     }
-    // Go to task master
-    actionQueue.push({
-      type: "move",
-      x: taskMasterLocation.x,
-      y: taskMasterLocation.y,
-    });
-    // Accept task
-    actionQueue.push({
-      type: "accept_task",
-    });
+
+    // Check if already doing this task
+    if (this.character.task.length === 0) {
+      // Go to task master
+      actionQueue.push({
+        type: "move",
+        x: taskMasterLocation.x,
+        y: taskMasterLocation.y,
+      });
+      // Accept task
+      actionQueue.push({
+        type: "accept_task",
+      });
+    } else if (this.character.task === taskToDo.code) {
+      taskToDo.min_quantity = this.character.task_total -
+        this.character.task_progress;
+    }
+
     // Executing the task
     if (taskToDo.type === "monsters") {
       actionQueue.push(
@@ -475,8 +483,61 @@ export class AiEngine {
     return tasks[tasks.length - 1];
   }
 
-  async task(quantity: number, taskCode: string) {
+  private cancelTaskActions(): QueuedAction[] {
     const actionQueue: QueuedAction[] = [];
+
+    let taskMasterLocation: MapSchema | undefined;
+    taskMasterLocation = gameData.getTaskMasterLocationByType(
+      this.character.task_type,
+    );
+    if (!taskMasterLocation) {
+      this.logger?.error(
+        "TASK",
+        "Could not find task master",
+        this.character.task,
+      );
+      return [];
+    }
+
+    // Go to task master
+    actionQueue.push({
+      type: "move",
+      x: taskMasterLocation.x,
+      y: taskMasterLocation.y,
+    });
+    // Cancel
+    actionQueue.push({
+      type: "cancel_task",
+    });
+
+    return actionQueue;
+  }
+
+  async task(
+    quantity: number,
+    taskCode: string,
+    cancelPrevious: boolean = false,
+  ) {
+    const actionQueue: QueuedAction[] = [];
+
+    // Check previous task
+    if (this.character.task.length > 0 && cancelPrevious != true) {
+      await this.logger?.info(
+        "TASK",
+        `Task ${this.character.task} already in progress ${this.character.task_progress}/${this.character.task_total}`,
+      );
+      const taskToDo = gameData.getTask(this.character.task);
+      actionQueue.push(...await this.taskActions(taskToDo!));
+      return actionQueue;
+    }
+    if (this.character.task.length > 0 && cancelPrevious == true) {
+      await this.logger?.info(
+        "TASK",
+        "Cancelling previous task",
+        this.character.task,
+      );
+      actionQueue.push(...this.cancelTaskActions());
+    }
 
     if (taskCode !== "unknown") {
       const taskToDo = gameData.getTask(taskCode);

@@ -1,6 +1,6 @@
 # ArtifactsMMO
 
-This repo is a client made to play with the Artifacts API to learn and experiment with Typescript and Deno.
+This repo is a client made to play with the Artifacts API to learn and experiment with Typescript, Deno and particularly [Web Workers/Threads](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API).
 
 <img align="right" width="40%" src="https://docs.artifactsmmo.com/_astro/overview.DgVfrCNj_1MLHTp.webp"/>
 

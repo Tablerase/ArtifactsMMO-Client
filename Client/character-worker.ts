@@ -2,15 +2,16 @@
 declare const self: DedicatedWorkerGlobalScope;
 
 // build/init gameData static object in worker thread
-import { gameData } from "./utils/gameData.ts";
+import { gameData } from "./utils/game-data.ts";
 
 import type {
   MainToWorkerMessage,
   WorkerToMainMessage,
 } from "./interface/messages.ts";
 import { ApiError } from "./api.ts";
-import { AiEngine } from "./aiEngine.ts";
+import { AiEngine } from "./ai-engine.ts";
 import { Logger } from "./utils/logger.ts";
+
 
 function sendToMain(msg: WorkerToMainMessage) {
   self.postMessage(msg);
